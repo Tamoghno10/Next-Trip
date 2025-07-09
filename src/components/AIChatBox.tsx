@@ -18,7 +18,7 @@ const AIChatBox = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      text: 'Hello! I\'m your travel assistant. How can I help you plan your trip today?',
+      text: 'Hello! I\'m your travel assistant. How can I help you plan your trip today? I can help with flights, hotels, trains, buses, and holiday packages!',
       sender: 'ai',
       timestamp: new Date(),
     },
@@ -42,20 +42,28 @@ const AIChatBox = () => {
       return 'I can help you find the best flights! What\'s your departure city and destination? Also, when would you like to travel?';
     } else if (lowerMessage.includes('hotel') || lowerMessage.includes('stay')) {
       return 'Great! I can assist with hotel bookings. Which city are you looking to stay in and for how many nights?';
+    } else if (lowerMessage.includes('train') || lowerMessage.includes('railway')) {
+      return 'Perfect! I can help you find train bookings. Which stations would you like to travel between? I can show you options for different classes like AC, sleeper, and more!';
+    } else if (lowerMessage.includes('bus') || lowerMessage.includes('coach')) {
+      return 'Excellent! I can help you find bus tickets. Which cities are you traveling between? I can show you AC sleeper, semi-sleeper, and regular bus options!';
     } else if (lowerMessage.includes('package') || lowerMessage.includes('tour')) {
       return 'Holiday packages are perfect for a complete travel experience! Are you interested in beach destinations, hill stations, or cultural tours?';
     } else if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('cheap')) {
-      return 'I understand you\'re looking for the best deals! Our platform compares prices from multiple providers. Would you like me to help you find budget-friendly options for flights, hotels, or packages?';
+      return 'I understand you\'re looking for the best deals! Our platform compares prices from multiple providers. Would you like me to help you find budget-friendly options for flights, hotels, trains, buses, or packages?';
     } else if (lowerMessage.includes('goa') || lowerMessage.includes('kerala') || lowerMessage.includes('rajasthan')) {
-      return `${lowerMessage.charAt(0).toUpperCase() + lowerMessage.slice(1)} is a fantastic destination! We have great packages and deals available. Would you like me to show you flight + hotel combos or complete tour packages?`;
+      return `${lowerMessage.charAt(0).toUpperCase() + lowerMessage.slice(1)} is a fantastic destination! We have great packages and deals available. Would you like me to show you flight + hotel combos, train options, bus routes, or complete tour packages?`;
     } else if (lowerMessage.includes('cancel') || lowerMessage.includes('refund')) {
       return 'I can help you with cancellations and refunds. Please provide your booking reference number, and I\'ll check the cancellation policy for your booking.';
+    } else if (lowerMessage.includes('ac') || lowerMessage.includes('sleeper') || lowerMessage.includes('class')) {
+      return 'Great question about travel classes! For trains, we offer Sleeper, AC 3-Tier, AC 2-Tier, and AC 1st Class. For buses, we have AC Sleeper, AC Semi-Sleeper, Non-AC Sleeper, and Non-AC Seater options. Which type of journey are you planning?';
+    } else if (lowerMessage.includes('station') || lowerMessage.includes('platform')) {
+      return 'I can help you with train station information! We cover major stations like New Delhi (NDLS), Mumbai Central (MMCT), Bangalore City (SBC), Chennai Central (MAS), and many more. Which route are you looking for?';
     } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
-      return 'Hello! Welcome to TravelEase. I\'m here to help you with flights, hotels, holiday packages, and any travel-related questions. What are you planning today?';
+      return 'Hello! Welcome to TravelEase. I\'m here to help you with flights, hotels, trains, buses, holiday packages, and any travel-related questions. What are you planning today?';
     } else if (lowerMessage.includes('thank')) {
-      return 'You\'re welcome! I\'m always here to help make your travel planning easier. Is there anything else you\'d like to know?';
+      return 'You\'re welcome! I\'m always here to help make your travel planning easier. Is there anything else you\'d like to know about flights, hotels, trains, buses, or packages?';
     } else {
-      return 'I\'m here to help with all your travel needs! You can ask me about flights, hotels, holiday packages, destinations, pricing, or any other travel-related questions. What would you like to know?';
+      return 'I\'m here to help with all your travel needs! You can ask me about flights, hotels, trains, buses, holiday packages, destinations, pricing, or any other travel-related questions. What would you like to know?';
     }
   };
 
@@ -181,7 +189,7 @@ const AIChatBox = () => {
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Ask me about flights, hotels..."
+                  placeholder="Ask about flights, hotels, trains, buses..."
                   className="flex-1"
                 />
                 <Button onClick={handleSendMessage} size="sm">

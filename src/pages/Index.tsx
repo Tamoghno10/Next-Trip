@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, MapPin, Users, Search, Star, Plane, Building, Package, CreditCard, User, Menu, X } from 'lucide-react';
+import { Calendar, MapPin, Users, Search, Star, Plane, Building, Package, CreditCard, User, Menu, X, Train, Bus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -24,7 +24,7 @@ const Index = () => {
   const { toast } = useToast();
 
   const handleSearch = (searchType: string, searchData: any) => {
-    // Mock search functionality
+    // Mock search functionality with new train and bus data
     const mockResults = {
       flights: [
         { id: 1, from: 'Delhi', to: 'Mumbai', price: 4500, airline: 'SpiceJet', duration: '2h 15m', departure: '08:30', arrival: '10:45' },
@@ -40,6 +40,16 @@ const Index = () => {
         { id: 1, name: 'Goa Beach Paradise', duration: '5 Days', price: 15000, rating: 4.6, includes: ['Flight', 'Hotel', 'Meals'] },
         { id: 2, name: 'Kerala Backwaters', duration: '7 Days', price: 22000, rating: 4.7, includes: ['Flight', 'Houseboat', 'Meals'] },
         { id: 3, name: 'Rajasthan Heritage', duration: '6 Days', price: 18500, rating: 4.5, includes: ['Flight', 'Hotel', 'Sightseeing'] },
+      ],
+      trains: [
+        { id: 1, from: 'Delhi', to: 'Mumbai', price: 1200, trainName: 'Rajdhani Express', trainNumber: '12951', duration: '16h 35m', departure: '16:55', arrival: '09:30', class: 'AC 3-Tier' },
+        { id: 2, from: 'Delhi', to: 'Mumbai', price: 2100, trainName: 'Mumbai Rajdhani', trainNumber: '12953', duration: '15h 50m', departure: '17:00', arrival: '08:50', class: 'AC 2-Tier' },
+        { id: 3, from: 'Delhi', to: 'Mumbai', price: 800, trainName: 'August Kranti', trainNumber: '12617', duration: '17h 30m', departure: '17:05', arrival: '10:35', class: 'Sleeper' },
+      ],
+      buses: [
+        { id: 1, from: 'Delhi', to: 'Mumbai', price: 1800, busOperator: 'Volvo A/C Sleeper', duration: '18h 30m', departure: '18:00', arrival: '12:30', busType: 'AC Sleeper' },
+        { id: 2, from: 'Delhi', to: 'Mumbai', price: 1500, busOperator: 'RedBus Express', duration: '19h 15m', departure: '19:30', arrival: '14:45', busType: 'AC Semi-Sleeper' },
+        { id: 3, from: 'Delhi', to: 'Mumbai', price: 1200, busOperator: 'Travels India', duration: '20h 00m', departure: '20:00', arrival: '16:00', busType: 'Non-AC Sleeper' },
       ]
     };
     
@@ -92,6 +102,8 @@ const Index = () => {
             <nav className="hidden md:flex space-x-8">
               <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Flights</a>
               <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Hotels</a>
+              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Trains</a>
+              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Buses</a>
               <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Holiday Packages</a>
               <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Offers</a>
               <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Support</a>
@@ -132,6 +144,8 @@ const Index = () => {
             <div className="px-2 pt-2 pb-3 space-y-1">
               <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Flights</a>
               <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Hotels</a>
+              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Trains</a>
+              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Buses</a>
               <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Holiday Packages</a>
               <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Offers</a>
               <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Support</a>
@@ -149,7 +163,7 @@ const Index = () => {
               Discover Your Next Adventure
             </h1>
             <p className="text-xl md:text-2xl opacity-90">
-              Find flights, hotels, and holiday packages at the best prices
+              Find flights, hotels, trains, buses, and holiday packages at the best prices
             </p>
           </div>
 
@@ -157,7 +171,7 @@ const Index = () => {
           <Card className="max-w-4xl mx-auto">
             <CardContent className="p-6">
               <Tabs defaultValue="flights" className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
+                <TabsList className="grid w-full grid-cols-5">
                   <TabsTrigger value="flights" className="flex items-center gap-2">
                     <Plane className="h-4 w-4" />
                     Flights
@@ -165,6 +179,14 @@ const Index = () => {
                   <TabsTrigger value="hotels" className="flex items-center gap-2">
                     <Building className="h-4 w-4" />
                     Hotels
+                  </TabsTrigger>
+                  <TabsTrigger value="trains" className="flex items-center gap-2">
+                    <Train className="h-4 w-4" />
+                    Trains
+                  </TabsTrigger>
+                  <TabsTrigger value="buses" className="flex items-center gap-2">
+                    <Bus className="h-4 w-4" />
+                    Buses
                   </TabsTrigger>
                   <TabsTrigger value="packages" className="flex items-center gap-2">
                     <Package className="h-4 w-4" />
@@ -277,6 +299,124 @@ const Index = () => {
                   >
                     <Search className="h-4 w-4 mr-2" />
                     Search Hotels
+                  </Button>
+                </TabsContent>
+
+                {/* Train Search */}
+                <TabsContent value="trains" className="mt-6">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div>
+                      <Label htmlFor="train-from">From</Label>
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select station" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="delhi">New Delhi (NDLS)</SelectItem>
+                          <SelectItem value="mumbai">Mumbai Central (MMCT)</SelectItem>
+                          <SelectItem value="bangalore">Bangalore City (SBC)</SelectItem>
+                          <SelectItem value="chennai">Chennai Central (MAS)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="train-to">To</Label>
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select station" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="mumbai">Mumbai Central (MMCT)</SelectItem>
+                          <SelectItem value="delhi">New Delhi (NDLS)</SelectItem>
+                          <SelectItem value="goa">Goa (MAO)</SelectItem>
+                          <SelectItem value="kerala">Kochi (ERS)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="train-departure">Departure</Label>
+                      <Input type="date" id="train-departure" />
+                    </div>
+                    <div>
+                      <Label htmlFor="train-class">Class</Label>
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select class" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="sleeper">Sleeper</SelectItem>
+                          <SelectItem value="ac3">AC 3-Tier</SelectItem>
+                          <SelectItem value="ac2">AC 2-Tier</SelectItem>
+                          <SelectItem value="ac1">AC 1st Class</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <Button 
+                    className="w-full mt-4 bg-blue-600 hover:bg-blue-700"
+                    onClick={() => handleSearch('trains', {})}
+                  >
+                    <Search className="h-4 w-4 mr-2" />
+                    Search Trains
+                  </Button>
+                </TabsContent>
+
+                {/* Bus Search */}
+                <TabsContent value="buses" className="mt-6">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div>
+                      <Label htmlFor="bus-from">From</Label>
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select city" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="delhi">Delhi</SelectItem>
+                          <SelectItem value="mumbai">Mumbai</SelectItem>
+                          <SelectItem value="bangalore">Bangalore</SelectItem>
+                          <SelectItem value="chennai">Chennai</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="bus-to">To</Label>
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select city" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="mumbai">Mumbai</SelectItem>
+                          <SelectItem value="delhi">Delhi</SelectItem>
+                          <SelectItem value="goa">Goa</SelectItem>
+                          <SelectItem value="kerala">Kerala</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="bus-departure">Departure</Label>
+                      <Input type="date" id="bus-departure" />
+                    </div>
+                    <div>
+                      <Label htmlFor="bus-type">Bus Type</Label>
+                      <Select>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="ac-sleeper">AC Sleeper</SelectItem>
+                          <SelectItem value="ac-semi-sleeper">AC Semi-Sleeper</SelectItem>
+                          <SelectItem value="non-ac-sleeper">Non-AC Sleeper</SelectItem>
+                          <SelectItem value="non-ac-seater">Non-AC Seater</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <Button 
+                    className="w-full mt-4 bg-blue-600 hover:bg-blue-700"
+                    onClick={() => handleSearch('buses', {})}
+                  >
+                    <Search className="h-4 w-4 mr-2" />
+                    Search Buses
                   </Button>
                 </TabsContent>
 
@@ -451,6 +591,8 @@ const Index = () => {
               <ul className="space-y-2 text-gray-400">
                 <li><a href="#" className="hover:text-white transition-colors">Flight Booking</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Hotel Booking</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Train Booking</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Bus Booking</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Holiday Packages</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Car Rentals</a></li>
               </ul>
