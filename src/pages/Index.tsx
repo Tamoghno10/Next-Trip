@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Calendar, MapPin, Users, Search, Star, Plane, Building, Package, CreditCard, User, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -13,6 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 import AuthModal from '@/components/AuthModal';
 import PaymentModal from '@/components/PaymentModal';
 import SearchResults from '@/components/SearchResults';
+import AIChatBox from '@/components/AIChatBox';
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -482,6 +482,9 @@ const Index = () => {
         isOpen={isPaymentModalOpen} 
         onClose={() => setIsPaymentModalOpen(false)}
       />
+
+      {/* AI Chatbox */}
+      <AIChatBox />
     </div>
   );
 };
