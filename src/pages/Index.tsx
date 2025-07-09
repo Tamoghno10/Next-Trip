@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Calendar, MapPin, Users, Search, Star, Plane, Building, Package, CreditCard, User, Menu, X, Train, Bus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -95,7 +96,7 @@ const Index = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <Plane className="h-8 w-8 text-blue-600 mr-2" />
-              <span className="text-2xl font-bold text-gray-900">TravelEase</span>
+              <span className="text-2xl font-bold text-gray-900">Next Trip</span>
             </div>
             
             {/* Desktop Navigation */}
@@ -573,7 +574,7 @@ const Index = () => {
             <div>
               <div className="flex items-center mb-4">
                 <Plane className="h-8 w-8 text-blue-400 mr-2" />
-                <span className="text-xl font-bold">TravelEase</span>
+                <span className="text-xl font-bold">Next Trip</span>
               </div>
               <p className="text-gray-400">Your trusted travel companion for unforgettable journeys.</p>
             </div>
@@ -608,7 +609,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 TravelEase. All rights reserved.</p>
+            <p>&copy; 2024 Next Trip. All rights reserved.</p>
           </div>
         </div>
       </footer>
