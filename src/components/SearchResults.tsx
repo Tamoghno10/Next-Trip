@@ -3,7 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Star, Plane, Clock, MapPin, Wifi, Car, Utensils, Train, Bus } from 'lucide-react';
+import { Star, Plane, Clock, MapPin, Wifi, Car, Utensils, Train, Bus, Shield, Check } from 'lucide-react';
 
 interface SearchResultsProps {
   results: any[];
@@ -14,6 +14,41 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
   if (!results || results.length === 0) {
     return null;
   }
+
+  const getInsurancePrice = (basePrice: number) => {
+    return Math.round(basePrice * 0.08); // 8% of base price
+  };
+
+  const InsuranceColumn = ({ basePrice }: { basePrice: number }) => {
+    const insurancePrice = getInsurancePrice(basePrice);
+    
+    return (
+      <div className="border-l border-gray-200 pl-4 ml-4">
+        <div className="flex items-center gap-2 mb-2">
+          <Shield className="h-4 w-4 text-green-600" />
+          <span className="text-sm font-medium text-gray-900">Travel Insurance</span>
+        </div>
+        <div className="text-lg font-bold text-green-600 mb-2">₹{insurancePrice.toLocaleString()}</div>
+        <div className="space-y-1 text-xs text-gray-600">
+          <div className="flex items-center gap-1">
+            <Check className="h-3 w-3 text-green-500" />
+            <span>Trip Cancellation</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Check className="h-3 w-3 text-green-500" />
+            <span>Medical Coverage</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Check className="h-3 w-3 text-green-500" />
+            <span>Baggage Protection</span>
+          </div>
+        </div>
+        <Button size="sm" variant="outline" className="mt-2 w-full text-xs">
+          Add Insurance
+        </Button>
+      </div>
+    );
+  };
 
   const renderFlightResult = (flight: any) => (
     <Card key={flight.id} className="hover:shadow-lg transition-shadow duration-300">
@@ -32,12 +67,15 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
               </div>
             </div>
           </div>
-          <div className="text-right">
-            <div className="text-2xl font-bold text-blue-600">₹{flight.price.toLocaleString()}</div>
-            <div className="text-sm text-gray-600 mb-2">{flight.departure} - {flight.arrival}</div>
-            <Button onClick={() => onBooking(flight)} className="bg-orange-500 hover:bg-orange-600">
-              Book Now
-            </Button>
+          <div className="flex items-center">
+            <div className="text-right">
+              <div className="text-2xl font-bold text-blue-600">₹{flight.price.toLocaleString()}</div>
+              <div className="text-sm text-gray-600 mb-2">{flight.departure} - {flight.arrival}</div>
+              <Button onClick={() => onBooking(flight)} className="bg-orange-500 hover:bg-orange-600">
+                Book Now
+              </Button>
+            </div>
+            <InsuranceColumn basePrice={flight.price} />
           </div>
         </div>
       </CardContent>
@@ -70,12 +108,15 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
               </div>
             </div>
           </div>
-          <div className="text-right">
-            <div className="text-2xl font-bold text-green-600">₹{hotel.price.toLocaleString()}</div>
-            <div className="text-sm text-gray-600 mb-2">per night</div>
-            <Button onClick={() => onBooking(hotel)} className="bg-orange-500 hover:bg-orange-600">
-              Book Now
-            </Button>
+          <div className="flex items-center">
+            <div className="text-right">
+              <div className="text-2xl font-bold text-green-600">₹{hotel.price.toLocaleString()}</div>
+              <div className="text-sm text-gray-600 mb-2">per night</div>
+              <Button onClick={() => onBooking(hotel)} className="bg-orange-500 hover:bg-orange-600">
+                Book Now
+              </Button>
+            </div>
+            <InsuranceColumn basePrice={hotel.price} />
           </div>
         </div>
       </CardContent>
@@ -103,12 +144,15 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
               </div>
             </div>
           </div>
-          <div className="text-right">
-            <div className="text-2xl font-bold text-indigo-600">₹{train.price.toLocaleString()}</div>
-            <div className="text-sm text-gray-600 mb-2">{train.departure} - {train.arrival}</div>
-            <Button onClick={() => onBooking(train)} className="bg-orange-500 hover:bg-orange-600">
-              Book Now
-            </Button>
+          <div className="flex items-center">
+            <div className="text-right">
+              <div className="text-2xl font-bold text-indigo-600">₹{train.price.toLocaleString()}</div>
+              <div className="text-sm text-gray-600 mb-2">{train.departure} - {train.arrival}</div>
+              <Button onClick={() => onBooking(train)} className="bg-orange-500 hover:bg-orange-600">
+                Book Now
+              </Button>
+            </div>
+            <InsuranceColumn basePrice={train.price} />
           </div>
         </div>
       </CardContent>
@@ -135,12 +179,15 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
               </div>
             </div>
           </div>
-          <div className="text-right">
-            <div className="text-2xl font-bold text-orange-600">₹{bus.price.toLocaleString()}</div>
-            <div className="text-sm text-gray-600 mb-2">{bus.departure} - {bus.arrival}</div>
-            <Button onClick={() => onBooking(bus)} className="bg-orange-500 hover:bg-orange-600">
-              Book Now
-            </Button>
+          <div className="flex items-center">
+            <div className="text-right">
+              <div className="text-2xl font-bold text-orange-600">₹{bus.price.toLocaleString()}</div>
+              <div className="text-sm text-gray-600 mb-2">{bus.departure} - {bus.arrival}</div>
+              <Button onClick={() => onBooking(bus)} className="bg-orange-500 hover:bg-orange-600">
+                Book Now
+              </Button>
+            </div>
+            <InsuranceColumn basePrice={bus.price} />
           </div>
         </div>
       </CardContent>
@@ -173,12 +220,15 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
               </div>
             </div>
           </div>
-          <div className="text-right">
-            <div className="text-2xl font-bold text-purple-600">₹{pkg.price.toLocaleString()}</div>
-            <div className="text-sm text-gray-600 mb-2">per person</div>
-            <Button onClick={() => onBooking(pkg)} className="bg-orange-500 hover:bg-orange-600">
-              Book Now
-            </Button>
+          <div className="flex items-center">
+            <div className="text-right">
+              <div className="text-2xl font-bold text-purple-600">₹{pkg.price.toLocaleString()}</div>
+              <div className="text-sm text-gray-600 mb-2">per person</div>
+              <Button onClick={() => onBooking(pkg)} className="bg-orange-500 hover:bg-orange-600">
+                Book Now
+              </Button>
+            </div>
+            <InsuranceColumn basePrice={pkg.price} />
           </div>
         </div>
       </CardContent>
