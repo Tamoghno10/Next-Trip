@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Calendar, MapPin, Users, Search, Star, Plane, Building, Package, CreditCard, User, Menu, X, Train, Bus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -89,25 +88,25 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-orange-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
       {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="bg-white booking-shadow sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              <Plane className="h-8 w-8 text-blue-600 mr-2" />
-              <span className="text-2xl font-bold text-gray-900">Next Trip</span>
+              <div className="w-8 h-8 booking-gradient booking-rounded flex items-center justify-center mr-3">
+                <span className="text-white font-bold text-sm">B</span>
+              </div>
+              <span className="text-2xl font-bold text-primary">Booking.com</span>
             </div>
             
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8">
-              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Flights</a>
-              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Hotels</a>
-              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Trains</a>
-              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Buses</a>
-              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Holiday Packages</a>
-              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Offers</a>
-              <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Support</a>
+              <a href="#" className="text-gray-700 hover:text-primary transition-colors font-medium">Stays</a>
+              <a href="#" className="text-gray-700 hover:text-primary transition-colors font-medium">Flights</a>
+              <a href="#" className="text-gray-700 hover:text-primary transition-colors font-medium">Car rentals</a>
+              <a href="#" className="text-gray-700 hover:text-primary transition-colors font-medium">Attractions</a>
+              <a href="#" className="text-gray-700 hover:text-primary transition-colors font-medium">Airport taxis</a>
             </nav>
 
             {/* User Actions */}
@@ -116,14 +115,18 @@ const Index = () => {
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-700">Hello, {userEmail.split('@')[0]}</span>
                   <Button variant="outline" size="sm" onClick={handleLogout}>
-                    Logout
+                    Sign out
                   </Button>
                 </div>
               ) : (
-                <Button onClick={() => setIsAuthModalOpen(true)} variant="outline" size="sm">
-                  <User className="h-4 w-4 mr-2" />
-                  Login
-                </Button>
+                <div className="flex items-center space-x-2">
+                  <Button variant="ghost" size="sm">
+                    Register
+                  </Button>
+                  <Button onClick={() => setIsAuthModalOpen(true)} size="sm">
+                    Sign in
+                  </Button>
+                </div>
               )}
               
               {/* Mobile menu button */}
@@ -143,65 +146,113 @@ const Index = () => {
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Flights</a>
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Hotels</a>
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Trains</a>
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Buses</a>
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Holiday Packages</a>
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Offers</a>
-              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-blue-600">Support</a>
+              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-primary font-medium">Stays</a>
+              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-primary font-medium">Flights</a>
+              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-primary font-medium">Car rentals</a>
+              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-primary font-medium">Attractions</a>
+              <a href="#" className="block px-3 py-2 text-gray-700 hover:text-primary font-medium">Airport taxis</a>
             </div>
           </div>
         )}
       </header>
 
       {/* Hero Section with Search */}
-      <section className="relative bg-gradient-to-r from-blue-600 to-orange-500 text-white py-20">
-        <div className="absolute inset-0 bg-black opacity-20"></div>
+      <section className="relative booking-hero-gradient text-white py-20">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              Discover Your Next Adventure
+              Find your next stay
             </h1>
             <p className="text-xl md:text-2xl opacity-90">
-              Find flights, hotels, trains, buses, and holiday packages at the best prices
+              Search low prices on hotels, homes and much more...
             </p>
           </div>
 
           {/* Search Tabs */}
-          <Card className="max-w-4xl mx-auto">
+          <Card className="max-w-4xl mx-auto booking-shadow-lg">
             <CardContent className="p-6">
-              <Tabs defaultValue="flights" className="w-full">
-                <TabsList className="grid w-full grid-cols-5">
-                  <TabsTrigger value="flights" className="flex items-center gap-2">
+              <Tabs defaultValue="hotels" className="w-full">
+                <TabsList className="grid w-full grid-cols-5 bg-muted/50">
+                  <TabsTrigger value="hotels" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                    <Building className="h-4 w-4" />
+                    Stays
+                  </TabsTrigger>
+                  <TabsTrigger value="flights" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                     <Plane className="h-4 w-4" />
                     Flights
                   </TabsTrigger>
-                  <TabsTrigger value="hotels" className="flex items-center gap-2">
-                    <Building className="h-4 w-4" />
-                    Hotels
-                  </TabsTrigger>
-                  <TabsTrigger value="trains" className="flex items-center gap-2">
+                  <TabsTrigger value="trains" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                     <Train className="h-4 w-4" />
                     Trains
                   </TabsTrigger>
-                  <TabsTrigger value="buses" className="flex items-center gap-2">
+                  <TabsTrigger value="buses" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                     <Bus className="h-4 w-4" />
                     Buses
                   </TabsTrigger>
-                  <TabsTrigger value="packages" className="flex items-center gap-2">
+                  <TabsTrigger value="packages" className="flex items-center gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                     <Package className="h-4 w-4" />
                     Packages
                   </TabsTrigger>
                 </TabsList>
 
+                {/* Hotel Search */}
+                <TabsContent value="hotels" className="mt-6">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div className="md:col-span-2">
+                      <Label htmlFor="destination" className="text-sm font-semibold text-gray-700">Where are you going?</Label>
+                      <Select>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
+                          <SelectValue placeholder="Enter destination" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="mumbai">Mumbai, Maharashtra, India</SelectItem>
+                          <SelectItem value="delhi">New Delhi, Delhi, India</SelectItem>
+                          <SelectItem value="goa">Goa, India</SelectItem>
+                          <SelectItem value="kerala">Kerala, India</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="checkin" className="text-sm font-semibold text-gray-700">Check-in date</Label>
+                      <Input type="date" id="checkin" className="h-12 border-2 focus:border-primary" />
+                    </div>
+                    <div>
+                      <Label htmlFor="checkout" className="text-sm font-semibold text-gray-700">Check-out date</Label>
+                      <Input type="date" id="checkout" className="h-12 border-2 focus:border-primary" />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div>
+                      <Label htmlFor="guests" className="text-sm font-semibold text-gray-700">Guests</Label>
+                      <Select>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
+                          <SelectValue placeholder="2 adults • 0 children • 1 room" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="1">1 adult • 0 children • 1 room</SelectItem>
+                          <SelectItem value="2">2 adults • 0 children • 1 room</SelectItem>
+                          <SelectItem value="3">3 adults • 0 children • 1 room</SelectItem>
+                          <SelectItem value="4">4 adults • 0 children • 1 room</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  <Button 
+                    className="w-full mt-6 h-12 text-lg font-semibold booking-gradient hover:opacity-90" 
+                    onClick={() => handleSearch('hotels', {})}
+                  >
+                    <Search className="h-5 w-5 mr-2" />
+                    Search
+                  </Button>
+                </TabsContent>
+
                 {/* Flight Search */}
                 <TabsContent value="flights" className="mt-6">
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
-                      <Label htmlFor="from">From</Label>
+                      <Label htmlFor="from" className="text-sm font-semibold text-gray-700">From</Label>
                       <Select>
-                        <SelectTrigger>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
                           <SelectValue placeholder="Select city" />
                         </SelectTrigger>
                         <SelectContent>
@@ -213,9 +264,9 @@ const Index = () => {
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="to">To</Label>
+                      <Label htmlFor="to" className="text-sm font-semibold text-gray-700">To</Label>
                       <Select>
-                        <SelectTrigger>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
                           <SelectValue placeholder="Select city" />
                         </SelectTrigger>
                         <SelectContent>
@@ -227,13 +278,13 @@ const Index = () => {
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="departure">Departure</Label>
-                      <Input type="date" id="departure" />
+                      <Label htmlFor="departure" className="text-sm font-semibold text-gray-700">Departure</Label>
+                      <Input type="date" id="departure" className="h-12 border-2 focus:border-primary" />
                     </div>
                     <div>
-                      <Label htmlFor="passengers">Passengers</Label>
+                      <Label htmlFor="passengers" className="text-sm font-semibold text-gray-700">Passengers</Label>
                       <Select>
-                        <SelectTrigger>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
                           <SelectValue placeholder="1 Adult" />
                         </SelectTrigger>
                         <SelectContent>
@@ -246,60 +297,11 @@ const Index = () => {
                     </div>
                   </div>
                   <Button 
-                    className="w-full mt-4 bg-blue-600 hover:bg-blue-700" 
+                    className="w-full mt-6 h-12 text-lg font-semibold booking-gradient hover:opacity-90" 
                     onClick={() => handleSearch('flights', {})}
                   >
-                    <Search className="h-4 w-4 mr-2" />
-                    Search Flights
-                  </Button>
-                </TabsContent>
-
-                {/* Hotel Search */}
-                <TabsContent value="hotels" className="mt-6">
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div>
-                      <Label htmlFor="city">City</Label>
-                      <Select>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select city" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="mumbai">Mumbai</SelectItem>
-                          <SelectItem value="delhi">Delhi</SelectItem>
-                          <SelectItem value="goa">Goa</SelectItem>
-                          <SelectItem value="kerala">Kerala</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <Label htmlFor="checkin">Check-in</Label>
-                      <Input type="date" id="checkin" />
-                    </div>
-                    <div>
-                      <Label htmlFor="checkout">Check-out</Label>
-                      <Input type="date" id="checkout" />
-                    </div>
-                    <div>
-                      <Label htmlFor="guests">Guests</Label>
-                      <Select>
-                        <SelectTrigger>
-                          <SelectValue placeholder="2 Guests" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="1">1 Guest</SelectItem>
-                          <SelectItem value="2">2 Guests</SelectItem>
-                          <SelectItem value="3">3 Guests</SelectItem>
-                          <SelectItem value="4">4 Guests</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                  <Button 
-                    className="w-full mt-4 bg-blue-600 hover:bg-blue-700"
-                    onClick={() => handleSearch('hotels', {})}
-                  >
-                    <Search className="h-4 w-4 mr-2" />
-                    Search Hotels
+                    <Search className="h-5 w-5 mr-2" />
+                    Search flights
                   </Button>
                 </TabsContent>
 
@@ -307,9 +309,9 @@ const Index = () => {
                 <TabsContent value="trains" className="mt-6">
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
-                      <Label htmlFor="train-from">From</Label>
+                      <Label htmlFor="train-from" className="text-sm font-semibold text-gray-700">From</Label>
                       <Select>
-                        <SelectTrigger>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
                           <SelectValue placeholder="Select station" />
                         </SelectTrigger>
                         <SelectContent>
@@ -321,9 +323,9 @@ const Index = () => {
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="train-to">To</Label>
+                      <Label htmlFor="train-to" className="text-sm font-semibold text-gray-700">To</Label>
                       <Select>
-                        <SelectTrigger>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
                           <SelectValue placeholder="Select station" />
                         </SelectTrigger>
                         <SelectContent>
@@ -335,13 +337,13 @@ const Index = () => {
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="train-departure">Departure</Label>
-                      <Input type="date" id="train-departure" />
+                      <Label htmlFor="train-departure" className="text-sm font-semibold text-gray-700">Departure</Label>
+                      <Input type="date" id="train-departure" className="h-12 border-2 focus:border-primary" />
                     </div>
                     <div>
-                      <Label htmlFor="train-class">Class</Label>
+                      <Label htmlFor="train-class" className="text-sm font-semibold text-gray-700">Class</Label>
                       <Select>
-                        <SelectTrigger>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
                           <SelectValue placeholder="Select class" />
                         </SelectTrigger>
                         <SelectContent>
@@ -354,11 +356,11 @@ const Index = () => {
                     </div>
                   </div>
                   <Button 
-                    className="w-full mt-4 bg-blue-600 hover:bg-blue-700"
+                    className="w-full mt-6 h-12 text-lg font-semibold booking-gradient hover:opacity-90"
                     onClick={() => handleSearch('trains', {})}
                   >
-                    <Search className="h-4 w-4 mr-2" />
-                    Search Trains
+                    <Search className="h-5 w-5 mr-2" />
+                    Search trains
                   </Button>
                 </TabsContent>
 
@@ -366,9 +368,9 @@ const Index = () => {
                 <TabsContent value="buses" className="mt-6">
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
-                      <Label htmlFor="bus-from">From</Label>
+                      <Label htmlFor="bus-from" className="text-sm font-semibold text-gray-700">From</Label>
                       <Select>
-                        <SelectTrigger>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
                           <SelectValue placeholder="Select city" />
                         </SelectTrigger>
                         <SelectContent>
@@ -380,9 +382,9 @@ const Index = () => {
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="bus-to">To</Label>
+                      <Label htmlFor="bus-to" className="text-sm font-semibold text-gray-700">To</Label>
                       <Select>
-                        <SelectTrigger>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
                           <SelectValue placeholder="Select city" />
                         </SelectTrigger>
                         <SelectContent>
@@ -394,13 +396,13 @@ const Index = () => {
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="bus-departure">Departure</Label>
-                      <Input type="date" id="bus-departure" />
+                      <Label htmlFor="bus-departure" className="text-sm font-semibold text-gray-700">Departure</Label>
+                      <Input type="date" id="bus-departure" className="h-12 border-2 focus:border-primary" />
                     </div>
                     <div>
-                      <Label htmlFor="bus-type">Bus Type</Label>
+                      <Label htmlFor="bus-type" className="text-sm font-semibold text-gray-700">Bus Type</Label>
                       <Select>
-                        <SelectTrigger>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
                           <SelectValue placeholder="Select type" />
                         </SelectTrigger>
                         <SelectContent>
@@ -413,11 +415,11 @@ const Index = () => {
                     </div>
                   </div>
                   <Button 
-                    className="w-full mt-4 bg-blue-600 hover:bg-blue-700"
+                    className="w-full mt-6 h-12 text-lg font-semibold booking-gradient hover:opacity-90"
                     onClick={() => handleSearch('buses', {})}
                   >
-                    <Search className="h-4 w-4 mr-2" />
-                    Search Buses
+                    <Search className="h-5 w-5 mr-2" />
+                    Search buses
                   </Button>
                 </TabsContent>
 
@@ -425,9 +427,9 @@ const Index = () => {
                 <TabsContent value="packages" className="mt-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <Label htmlFor="destination">Destination</Label>
+                      <Label htmlFor="destination" className="text-sm font-semibold text-gray-700">Destination</Label>
                       <Select>
-                        <SelectTrigger>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
                           <SelectValue placeholder="Select destination" />
                         </SelectTrigger>
                         <SelectContent>
@@ -439,9 +441,9 @@ const Index = () => {
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="duration">Duration</Label>
+                      <Label htmlFor="duration" className="text-sm font-semibold text-gray-700">Duration</Label>
                       <Select>
-                        <SelectTrigger>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
                           <SelectValue placeholder="Select duration" />
                         </SelectTrigger>
                         <SelectContent>
@@ -453,9 +455,9 @@ const Index = () => {
                       </Select>
                     </div>
                     <div>
-                      <Label htmlFor="budget">Budget</Label>
+                      <Label htmlFor="budget" className="text-sm font-semibold text-gray-700">Budget</Label>
                       <Select>
-                        <SelectTrigger>
+                        <SelectTrigger className="h-12 border-2 focus:border-primary">
                           <SelectValue placeholder="Select budget" />
                         </SelectTrigger>
                         <SelectContent>
@@ -467,11 +469,11 @@ const Index = () => {
                     </div>
                   </div>
                   <Button 
-                    className="w-full mt-4 bg-blue-600 hover:bg-blue-700"
+                    className="w-full mt-6 h-12 text-lg font-semibold booking-gradient hover:opacity-90"
                     onClick={() => handleSearch('packages', {})}
                   >
-                    <Search className="h-4 w-4 mr-2" />
-                    Search Packages
+                    <Search className="h-5 w-5 mr-2" />
+                    Search packages
                   </Button>
                 </TabsContent>
               </Tabs>
@@ -492,41 +494,50 @@ const Index = () => {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Special Offers</h2>
-            <p className="text-lg text-gray-600">Don't miss out on these amazing deals!</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Offers</h2>
+            <p className="text-lg text-gray-600">Promotions, deals and special offers for you</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-6">
-                <div className="bg-gradient-to-r from-red-500 to-pink-500 text-white p-4 rounded-lg mb-4">
-                  <h3 className="text-xl font-bold mb-2">Flight Sale</h3>
-                  <p className="text-sm">Up to 40% off on domestic flights</p>
+            <Card className="booking-shadow hover:booking-shadow-lg transition-all duration-300 booking-rounded-lg overflow-hidden">
+              <div className="h-48 bg-gradient-to-r from-red-500 to-pink-500 flex items-center justify-center">
+                <div className="text-center text-white">
+                  <h3 className="text-2xl font-bold mb-2">Take your longest vacation yet</h3>
+                  <p className="text-sm opacity-90">Browse properties offering long-term stays</p>
                 </div>
-                <p className="text-gray-600 mb-4">Book now and save big on your next trip!</p>
-                <Badge variant="secondary">Valid till Dec 31</Badge>
+              </div>
+              <CardContent className="p-6">
+                <Button variant="outline" className="w-full font-semibold">
+                  Find a stay
+                </Button>
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-6">
-                <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-4 rounded-lg mb-4">
-                  <h3 className="text-xl font-bold mb-2">Hotel Deals</h3>
-                  <p className="text-sm">Get extra 25% off on hotel bookings</p>
+            <Card className="booking-shadow hover:booking-shadow-lg transition-all duration-300 booking-rounded-lg overflow-hidden">
+              <div className="h-48 bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center">
+                <div className="text-center text-white">
+                  <h3 className="text-2xl font-bold mb-2">Fly away to your dream vacation</h3>
+                  <p className="text-sm opacity-90">Get inspired, compare and book flights</p>
                 </div>
-                <p className="text-gray-600 mb-4">Luxury stays at unbeatable prices!</p>
-                <Badge variant="secondary">Limited time</Badge>
+              </div>
+              <CardContent className="p-6">
+                <Button variant="outline" className="w-full font-semibold">
+                  Search flights
+                </Button>
               </CardContent>
             </Card>
 
-            <Card className="hover:shadow-lg transition-shadow duration-300">
-              <CardContent className="p-6">
-                <div className="bg-gradient-to-r from-green-500 to-teal-500 text-white p-4 rounded-lg mb-4">
-                  <h3 className="text-xl font-bold mb-2">Package Tours</h3>
-                  <p className="text-sm">Complete packages starting ₹9,999</p>
+            <Card className="booking-shadow hover:booking-shadow-lg transition-all duration-300 booking-rounded-lg overflow-hidden">
+              <div className="h-48 bg-gradient-to-r from-green-500 to-teal-500 flex items-center justify-center">
+                <div className="text-center text-white">
+                  <h3 className="text-2xl font-bold mb-2">Car rental for any kind of trip</h3>
+                  <p className="text-sm opacity-90">Compare rental cars and find deals</p>
                 </div>
-                <p className="text-gray-600 mb-4">All-inclusive deals for memorable vacations!</p>
-                <Badge variant="secondary">Book today</Badge>
+              </div>
+              <CardContent className="p-6">
+                <Button variant="outline" className="w-full font-semibold">
+                  Search cars
+                </Button>
               </CardContent>
             </Card>
           </div>
@@ -537,28 +548,28 @@ const Index = () => {
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Popular Destinations</h2>
-            <p className="text-lg text-gray-600">Explore the most loved travel destinations</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Trending destinations</h2>
+            <p className="text-lg text-gray-600">Most popular choices for travelers from India</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: 'Goa', image: 'photo-1500375592092-40eb2168fd21', description: 'Beaches & Nightlife' },
-              { name: 'Kerala', image: 'photo-1482938289607-e9573fc25ebb', description: 'Backwaters & Nature' },
-              { name: 'Rajasthan', image: 'photo-1469474968028-56623f02e42e', description: 'Heritage & Culture' },
-              { name: 'Himachal', image: 'photo-1472396961693-142e6e269027', description: 'Mountains & Adventure' }
+              { name: 'Goa', image: 'photo-1500375592092-40eb2168fd21', properties: '1,289 properties' },
+              { name: 'Kerala', image: 'photo-1482938289607-e9573fc25ebb', properties: '967 properties' },
+              { name: 'Rajasthan', image: 'photo-1469474968028-56623f02e42e', properties: '2,156 properties' },
+              { name: 'Himachal', image: 'photo-1472396961693-142e6e269027', properties: '1,543 properties' }
             ].map((destination) => (
-              <Card key={destination.name} className="group cursor-pointer hover:shadow-lg transition-all duration-300">
-                <div className="relative h-48 overflow-hidden rounded-t-lg">
+              <Card key={destination.name} className="group cursor-pointer booking-shadow hover:booking-shadow-lg transition-all duration-300 booking-rounded-lg overflow-hidden">
+                <div className="relative h-48 overflow-hidden">
                   <img 
                     src={`https://images.unsplash.com/${destination.image}?w=400&h=200&fit=crop`}
                     alt={destination.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-4 left-4 text-white">
                     <h3 className="text-xl font-bold">{destination.name}</h3>
-                    <p className="text-sm opacity-90">{destination.description}</p>
+                    <p className="text-sm opacity-90">{destination.properties}</p>
                   </div>
                 </div>
               </Card>
@@ -568,48 +579,48 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
+      <footer className="bg-primary text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center mb-4">
-                <Plane className="h-8 w-8 text-blue-400 mr-2" />
-                <span className="text-xl font-bold">Next Trip</span>
+                <div className="w-8 h-8 bg-white/20 booking-rounded flex items-center justify-center mr-3">
+                  <span className="text-white font-bold text-sm">B</span>
+                </div>
+                <span className="text-xl font-bold">Booking.com</span>
               </div>
-              <p className="text-gray-400">Your trusted travel companion for unforgettable journeys.</p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Terms & Conditions</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Services</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Flight Booking</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Hotel Booking</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Train Booking</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Bus Booking</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Holiday Packages</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Car Rentals</a></li>
-              </ul>
+              <p className="text-blue-100">Book accommodations, flights and more.</p>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4">Support</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">24/7 Support</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Cancellation</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Refunds</a></li>
+              <ul className="space-y-2 text-blue-100">
+                <li><a href="#" className="hover:text-white transition-colors">Coronavirus (COVID-19) FAQs</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Manage your trips</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Contact Customer Service</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Safety Resource Center</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Discover</h4>
+              <ul className="space-y-2 text-blue-100">
+                <li><a href="#" className="hover:text-white transition-colors">Genius loyalty program</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Seasonal and holiday deals</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Travel articles</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Booking.com for Business</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Terms and settings</h4>
+              <ul className="space-y-2 text-blue-100">
+                <li><a href="#" className="hover:text-white transition-colors">Privacy & cookies</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Terms & conditions</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Partner dispute</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Modern Slavery Statement</a></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 Next Trip. All rights reserved.</p>
+          <div className="border-t border-blue-400 mt-8 pt-8 text-center text-blue-100">
+            <p>&copy; 2024 Booking.com. All rights reserved.</p>
           </div>
         </div>
       </footer>
