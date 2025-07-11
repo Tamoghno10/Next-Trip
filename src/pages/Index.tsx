@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Calendar, MapPin, Users, Search, Star, Plane, Building, Package, CreditCard, User, Menu, X, Train, Bus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -95,9 +96,9 @@ const Index = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="w-8 h-8 booking-gradient booking-rounded flex items-center justify-center mr-3">
-                <span className="text-white font-bold text-sm">B</span>
+                <span className="text-white font-bold text-sm">N</span>
               </div>
-              <span className="text-2xl font-bold text-primary">Booking.com</span>
+              <span className="text-2xl font-bold text-primary">Next Trip</span>
             </div>
             
             {/* Desktop Navigation */}
@@ -585,9 +586,9 @@ const Index = () => {
             <div>
               <div className="flex items-center mb-4">
                 <div className="w-8 h-8 bg-white/20 booking-rounded flex items-center justify-center mr-3">
-                  <span className="text-white font-bold text-sm">B</span>
+                  <span className="text-white font-bold text-sm">N</span>
                 </div>
-                <span className="text-xl font-bold">Booking.com</span>
+                <span className="text-xl font-bold">Next Trip</span>
               </div>
               <p className="text-blue-100">Book accommodations, flights and more.</p>
             </div>
@@ -606,7 +607,7 @@ const Index = () => {
                 <li><a href="#" className="hover:text-white transition-colors">Genius loyalty program</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Seasonal and holiday deals</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Travel articles</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Booking.com for Business</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Next Trip for Business</a></li>
               </ul>
             </div>
             <div>
@@ -620,7 +621,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-blue-400 mt-8 pt-8 text-center text-blue-100">
-            <p>&copy; 2024 Booking.com. All rights reserved.</p>
+            <p>&copy; 2024 Next Trip. All rights reserved.</p>
           </div>
         </div>
       </footer>
