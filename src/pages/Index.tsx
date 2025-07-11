@@ -24,6 +24,58 @@ const Index = () => {
   const [userEmail, setUserEmail] = useState('');
   const { toast } = useToast();
 
+  // Indian cities with airport facilities
+  const indianCitiesWithAirports = [
+    { value: 'mumbai', label: 'Mumbai, Maharashtra' },
+    { value: 'delhi', label: 'New Delhi, Delhi' },
+    { value: 'bangalore', label: 'Bangalore, Karnataka' },
+    { value: 'chennai', label: 'Chennai, Tamil Nadu' },
+    { value: 'kolkata', label: 'Kolkata, West Bengal' },
+    { value: 'hyderabad', label: 'Hyderabad, Telangana' },
+    { value: 'pune', label: 'Pune, Maharashtra' },
+    { value: 'ahmedabad', label: 'Ahmedabad, Gujarat' },
+    { value: 'cochin', label: 'Kochi, Kerala' },
+    { value: 'goa', label: 'Goa' },
+    { value: 'jaipur', label: 'Jaipur, Rajasthan' },
+    { value: 'lucknow', label: 'Lucknow, Uttar Pradesh' },
+    { value: 'chandigarh', label: 'Chandigarh' },
+    { value: 'coimbatore', label: 'Coimbatore, Tamil Nadu' },
+    { value: 'nagpur', label: 'Nagpur, Maharashtra' },
+    { value: 'vadodara', label: 'Vadodara, Gujarat' },
+    { value: 'indore', label: 'Indore, Madhya Pradesh' },
+    { value: 'bhubaneswar', label: 'Bhubaneswar, Odisha' },
+    { value: 'thiruvananthapuram', label: 'Thiruvananthapuram, Kerala' },
+    { value: 'srinagar', label: 'Srinagar, Jammu & Kashmir' },
+    { value: 'amritsar', label: 'Amritsar, Punjab' },
+    { value: 'varanasi', label: 'Varanasi, Uttar Pradesh' },
+    { value: 'guwahati', label: 'Guwahati, Assam' },
+    { value: 'patna', label: 'Patna, Bihar' },
+    { value: 'raipur', label: 'Raipur, Chhattisgarh' },
+    { value: 'mangalore', label: 'Mangalore, Karnataka' },
+    { value: 'vijayawada', label: 'Vijayawada, Andhra Pradesh' },
+    { value: 'vishakhapatnam', label: 'Visakhapatnam, Andhra Pradesh' },
+    { value: 'madurai', label: 'Madurai, Tamil Nadu' },
+    { value: 'tiruchirappalli', label: 'Tiruchirappalli, Tamil Nadu' },
+    { value: 'calicut', label: 'Calicut, Kerala' },
+    { value: 'bagdogra', label: 'Bagdogra, West Bengal' },
+    { value: 'dehradun', label: 'Dehradun, Uttarakhand' },
+    { value: 'jodhpur', label: 'Jodhpur, Rajasthan' },
+    { value: 'udaipur', label: 'Udaipur, Rajasthan' },
+    { value: 'ranchi', label: 'Ranchi, Jharkhand' },
+    { value: 'agartala', label: 'Agartala, Tripura' },
+    { value: 'imphal', label: 'Imphal, Manipur' },
+    { value: 'dimapur', label: 'Dimapur, Nagaland' },
+    { value: 'dibrugarh', label: 'Dibrugarh, Assam' },
+    { value: 'agra', label: 'Agra, Uttar Pradesh' },
+    { value: 'jammu', label: 'Jammu, Jammu & Kashmir' },
+    { value: 'leh', label: 'Leh, Ladakh' },
+    { value: 'hubli', label: 'Hubli, Karnataka' },
+    { value: 'rajkot', label: 'Rajkot, Gujarat' },
+    { value: 'aurangabad', label: 'Aurangabad, Maharashtra' },
+    { value: 'salem', label: 'Salem, Tamil Nadu' },
+    { value: 'durgapur', label: 'Durgapur, West Bengal' }
+  ];
+
   const handleSearch = (searchType: string, searchData: any) => {
     // Mock search functionality with new train and bus data
     const mockResults = {
@@ -206,10 +258,11 @@ const Index = () => {
                           <SelectValue placeholder="Enter destination" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="mumbai">Mumbai, Maharashtra, India</SelectItem>
-                          <SelectItem value="delhi">New Delhi, Delhi, India</SelectItem>
-                          <SelectItem value="goa">Goa, India</SelectItem>
-                          <SelectItem value="kerala">Kerala, India</SelectItem>
+                          {indianCitiesWithAirports.map((city) => (
+                            <SelectItem key={city.value} value={city.value}>
+                              {city.label}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
@@ -257,10 +310,11 @@ const Index = () => {
                           <SelectValue placeholder="Select city" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="delhi">Delhi</SelectItem>
-                          <SelectItem value="mumbai">Mumbai</SelectItem>
-                          <SelectItem value="bangalore">Bangalore</SelectItem>
-                          <SelectItem value="chennai">Chennai</SelectItem>
+                          {indianCitiesWithAirports.map((city) => (
+                            <SelectItem key={city.value} value={city.value}>
+                              {city.label}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
@@ -271,10 +325,11 @@ const Index = () => {
                           <SelectValue placeholder="Select city" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="mumbai">Mumbai</SelectItem>
-                          <SelectItem value="delhi">Delhi</SelectItem>
-                          <SelectItem value="goa">Goa</SelectItem>
-                          <SelectItem value="kerala">Kerala</SelectItem>
+                          {indianCitiesWithAirports.map((city) => (
+                            <SelectItem key={city.value} value={city.value}>
+                              {city.label}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
@@ -316,10 +371,11 @@ const Index = () => {
                           <SelectValue placeholder="Select station" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="delhi">New Delhi (NDLS)</SelectItem>
-                          <SelectItem value="mumbai">Mumbai Central (MMCT)</SelectItem>
-                          <SelectItem value="bangalore">Bangalore City (SBC)</SelectItem>
-                          <SelectItem value="chennai">Chennai Central (MAS)</SelectItem>
+                          {indianCitiesWithAirports.map((city) => (
+                            <SelectItem key={city.value} value={city.value}>
+                              {city.label}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
@@ -330,10 +386,11 @@ const Index = () => {
                           <SelectValue placeholder="Select station" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="mumbai">Mumbai Central (MMCT)</SelectItem>
-                          <SelectItem value="delhi">New Delhi (NDLS)</SelectItem>
-                          <SelectItem value="goa">Goa (MAO)</SelectItem>
-                          <SelectItem value="kerala">Kochi (ERS)</SelectItem>
+                          {indianCitiesWithAirports.map((city) => (
+                            <SelectItem key={city.value} value={city.value}>
+                              {city.label}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
@@ -375,10 +432,11 @@ const Index = () => {
                           <SelectValue placeholder="Select city" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="delhi">Delhi</SelectItem>
-                          <SelectItem value="mumbai">Mumbai</SelectItem>
-                          <SelectItem value="bangalore">Bangalore</SelectItem>
-                          <SelectItem value="chennai">Chennai</SelectItem>
+                          {indianCitiesWithAirports.map((city) => (
+                            <SelectItem key={city.value} value={city.value}>
+                              {city.label}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
@@ -389,10 +447,11 @@ const Index = () => {
                           <SelectValue placeholder="Select city" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="mumbai">Mumbai</SelectItem>
-                          <SelectItem value="delhi">Delhi</SelectItem>
-                          <SelectItem value="goa">Goa</SelectItem>
-                          <SelectItem value="kerala">Kerala</SelectItem>
+                          {indianCitiesWithAirports.map((city) => (
+                            <SelectItem key={city.value} value={city.value}>
+                              {city.label}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
@@ -434,10 +493,11 @@ const Index = () => {
                           <SelectValue placeholder="Select destination" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="goa">Goa</SelectItem>
-                          <SelectItem value="kerala">Kerala</SelectItem>
-                          <SelectItem value="rajasthan">Rajasthan</SelectItem>
-                          <SelectItem value="himachal">Himachal Pradesh</SelectItem>
+                          {indianCitiesWithAirports.slice(0, 20).map((city) => (
+                            <SelectItem key={city.value} value={city.value}>
+                              {city.label}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
