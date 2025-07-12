@@ -77,17 +77,17 @@ const Index = () => {
   ];
 
   const handleSearch = (searchType: string, searchData: any) => {
-    // Mock search functionality with new train and bus data
+    // Mock search functionality with updated route patterns
     const mockResults = {
       flights: [
-        { id: 1, from: 'Delhi', to: 'Mumbai', price: 4500, airline: 'SpiceJet', duration: '2h 15m', departure: '08:30', arrival: '10:45' },
-        { id: 2, from: 'Delhi', to: 'Mumbai', price: 5200, airline: 'IndiGo', duration: '2h 10m', departure: '14:20', arrival: '16:30' },
-        { id: 3, from: 'Delhi', to: 'Mumbai', price: 4800, airline: 'Air India', duration: '2h 25m', departure: '18:15', arrival: '20:40' },
+        { id: 1, from: 'Bangalore', to: 'Chennai', price: 3200, airline: 'SpiceJet', duration: '1h 25m', departure: '09:15', arrival: '10:40' },
+        { id: 2, from: 'Bangalore', to: 'Chennai', price: 3800, airline: 'IndiGo', duration: '1h 20m', departure: '15:30', arrival: '16:50' },
+        { id: 3, from: 'Bangalore', to: 'Chennai', price: 3500, airline: 'Air India', duration: '1h 30m', departure: '19:45', arrival: '21:15' },
       ],
       hotels: [
-        { id: 1, name: 'Grand Plaza Hotel', location: 'Mumbai', price: 3500, rating: 4.5, amenities: ['WiFi', 'Pool', 'Spa'] },
-        { id: 2, name: 'Luxury Suites', location: 'Mumbai', price: 5500, rating: 4.8, amenities: ['WiFi', 'Gym', 'Restaurant'] },
-        { id: 3, name: 'Business Hotel', location: 'Mumbai', price: 2800, rating: 4.2, amenities: ['WiFi', 'Business Center'] },
+        { id: 1, name: 'Grand Plaza Hotel', location: 'Chennai', price: 2800, rating: 4.5, amenities: ['WiFi', 'Pool', 'Spa'] },
+        { id: 2, name: 'Luxury Suites', location: 'Chennai', price: 4200, rating: 4.8, amenities: ['WiFi', 'Gym', 'Restaurant'] },
+        { id: 3, name: 'Business Hotel', location: 'Chennai', price: 2100, rating: 4.2, amenities: ['WiFi', 'Business Center'] },
       ],
       packages: [
         { id: 1, name: 'Goa Beach Paradise', duration: '5 Days', price: 15000, rating: 4.6, includes: ['Flight', 'Hotel', 'Meals'] },
@@ -95,14 +95,14 @@ const Index = () => {
         { id: 3, name: 'Rajasthan Heritage', duration: '6 Days', price: 18500, rating: 4.5, includes: ['Flight', 'Hotel', 'Sightseeing'] },
       ],
       trains: [
-        { id: 1, from: 'Delhi', to: 'Mumbai', price: 1200, trainName: 'Rajdhani Express', trainNumber: '12951', duration: '16h 35m', departure: '16:55', arrival: '09:30', class: 'AC 3-Tier' },
-        { id: 2, from: 'Delhi', to: 'Mumbai', price: 2100, trainName: 'Mumbai Rajdhani', trainNumber: '12953', duration: '15h 50m', departure: '17:00', arrival: '08:50', class: 'AC 2-Tier' },
-        { id: 3, from: 'Delhi', to: 'Mumbai', price: 800, trainName: 'August Kranti', trainNumber: '12617', duration: '17h 30m', departure: '17:05', arrival: '10:35', class: 'Sleeper' },
+        { id: 1, from: 'Kolkata', to: 'Hyderabad', price: 1500, trainName: 'East Coast Express', trainNumber: '18645', duration: '20h 15m', departure: '14:20', arrival: '10:35', class: 'AC 3-Tier' },
+        { id: 2, from: 'Kolkata', to: 'Hyderabad', price: 2300, trainName: 'Falaknuma Express', trainNumber: '12703', duration: '18h 50m', departure: '16:40', arrival: '11:30', class: 'AC 2-Tier' },
+        { id: 3, from: 'Kolkata', to: 'Hyderabad', price: 950, trainName: 'Godavari Express', trainNumber: '12728', duration: '22h 10m', departure: '18:55', arrival: '17:05', class: 'Sleeper' },
       ],
       buses: [
-        { id: 1, from: 'Delhi', to: 'Mumbai', price: 1800, busOperator: 'Volvo A/C Sleeper', duration: '18h 30m', departure: '18:00', arrival: '12:30', busType: 'AC Sleeper' },
-        { id: 2, from: 'Delhi', to: 'Mumbai', price: 1500, busOperator: 'RedBus Express', duration: '19h 15m', departure: '19:30', arrival: '14:45', busType: 'AC Semi-Sleeper' },
-        { id: 3, from: 'Delhi', to: 'Mumbai', price: 1200, busOperator: 'Travels India', duration: '20h 00m', departure: '20:00', arrival: '16:00', busType: 'Non-AC Sleeper' },
+        { id: 1, from: 'Pune', to: 'Goa', price: 1200, busOperator: 'Volvo A/C Sleeper', duration: '12h 30m', departure: '20:30', arrival: '09:00', busType: 'AC Sleeper' },
+        { id: 2, from: 'Pune', to: 'Goa', price: 980, busOperator: 'RedBus Express', duration: '13h 15m', departure: '21:00', arrival: '10:15', busType: 'AC Semi-Sleeper' },
+        { id: 3, from: 'Pune', to: 'Goa', price: 750, busOperator: 'Travels India', duration: '14h 00m', departure: '19:30', arrival: '09:30', busType: 'Non-AC Sleeper' },
       ]
     };
     
