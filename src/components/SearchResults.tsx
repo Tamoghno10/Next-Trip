@@ -1,9 +1,10 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Star, Plane, Clock, MapPin, Wifi, Car, Utensils, Train, Bus, Shield, Check } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Star, Plane, Clock, MapPin, Wifi, Car, Utensils, Train, Bus, Shield, Check, Edit3 } from 'lucide-react';
 
 interface SearchResultsProps {
   results: any[];
@@ -11,12 +12,105 @@ interface SearchResultsProps {
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => {
+  const [editingResult, setEditingResult] = useState<number | null>(null);
+  const [modifiedResults, setModifiedResults] = useState(results);
+
+  // Indian cities with airport facilities
+  const indianCitiesWithAirports = [
+    { value: 'mumbai', label: 'Mumbai, Maharashtra' },
+    { value: 'delhi', label: 'New Delhi, Delhi' },
+    { value: 'bangalore', label: 'Bangalore, Karnataka' },
+    { value: 'chennai', label: 'Chennai, Tamil Nadu' },
+    { value: 'kolkata', label: 'Kolkata, West Bengal' },
+    { value: 'hyderabad', label: 'Hyderabad, Telangana' },
+    { value: 'pune', label: 'Pune, Maharashtra' },
+    { value: 'ahmedabad', label: 'Ahmedabad, Gujarat' },
+    { value: 'cochin', label: 'Kochi, Kerala' },
+    { value: 'goa', label: 'Goa' },
+    { value: 'jaipur', label: 'Jaipur, Rajasthan' },
+    { value: 'lucknow', label: 'Lucknow, Uttar Pradesh' },
+    { value: 'chandigarh', label: 'Chandigarh' },
+    { value: 'coimbatore', label: 'Coimbatore, Tamil Nadu' },
+    { value: 'nagpur', label: 'Nagpur, Maharashtra' },
+    { value: 'vadodara', label: 'Vadodara, Gujarat' },
+    { value: 'indore', label: 'Indore, Madhya Pradesh' },
+    { value: 'bhubaneswar', label: 'Bhubaneswar, Odisha' },
+    { value: 'thiruvananthapuram', label: 'Thiruvananthapuram, Kerala' },
+    { value: 'srinagar', label: 'Srinagar, Jammu & Kashmir' },
+    { value: 'amritsar', label: 'Amritsar, Punjab' },
+    { value: 'varanasi', label: 'Varanasi, Uttar Pradesh' },
+    { value: 'guwahati', label: 'Guwahati, Assam' },
+    { value: 'patna', label: 'Patna, Bihar' },
+    { value: 'raipur', label: 'Raipur, Chhattisgarh' },
+    { value: 'mangalore', label: 'Mangalore, Karnataka' },
+    { value: 'vijayawada', label: 'Vijayawada, Andhra Pradesh' },
+    { value: 'vishakhapatnam', label: 'Visakhapatnam, Andhra Pradesh' },
+    { value: 'madurai', label: 'Madurai, Tamil Nadu' },
+    { value: 'tiruchirappalli', label: 'Tiruchirappalli, Tamil Nadu' },
+  ];
+
   if (!results || results.length === 0) {
     return null;
   }
 
   const getInsurancePrice = (basePrice: number) => {
     return Math.round(basePrice * 0.08); // 8% of base price
+  };
+
+  const handleEditRoute = (index: number) => {
+    setEditingResult(index);
+  };
+
+  const handleSaveRoute = (index: number, newFrom: string, newTo: string) => {
+    const updatedResults = [...modifiedResults];
+    updatedResults[index] = {
+      ...updatedResults[index],
+      from: newFrom,
+      to: newTo
+    };
+    setModifiedResults(updatedResults);
+    setEditingResult(null);
+  };
+
+  const RouteEditor = ({ result, index }: { result: any, index: number }) => {
+    const [tempFrom, setTempFrom] = useState(result.from);
+    const [tempTo, setTempTo] = useState(result.to);
+
+    return (
+      <div className="flex items-center gap-2 mb-2">
+        <Select value={tempFrom.toLowerCase()} onValueChange={(value) => setTempFrom(indianCitiesWithAirports.find(city => city.value === value)?.label.split(',')[0] || value)}>
+          <SelectTrigger className="w-40">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {indianCitiesWithAirports.map((city) => (
+              <SelectItem key={city.value} value={city.value}>
+                {city.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <span className="text-gray-400">→</span>
+        <Select value={tempTo.toLowerCase()} onValueChange={(value) => setTempTo(indianCitiesWithAirports.find(city => city.value === value)?.label.split(',')[0] || value)}>
+          <SelectTrigger className="w-40">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {indianCitiesWithAirports.map((city) => (
+              <SelectItem key={city.value} value={city.value}>
+                {city.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Button size="sm" onClick={() => handleSaveRoute(index, tempFrom, tempTo)}>
+          Save
+        </Button>
+        <Button size="sm" variant="outline" onClick={() => setEditingResult(null)}>
+          Cancel
+        </Button>
+      </div>
+    );
   };
 
   const InsuranceColumn = ({ basePrice }: { basePrice: number }) => {
@@ -50,7 +144,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
     );
   };
 
-  const renderFlightResult = (flight: any) => (
+  const renderFlightResult = (flight: any, index: number) => (
     <Card key={flight.id} className="hover:shadow-lg transition-shadow duration-300">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
@@ -60,7 +154,23 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
             </div>
             <div>
               <h3 className="font-bold text-lg">{flight.airline}</h3>
-              <p className="text-gray-600">{flight.from} → {flight.to}</p>
+              <div className="flex items-center gap-2">
+                {editingResult === index ? (
+                  <RouteEditor result={flight} index={index} />
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <p className="text-gray-600">{flight.from} → {flight.to}</p>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => handleEditRoute(index)}
+                      className="p-1 h-6 w-6"
+                    >
+                      <Edit3 className="h-3 w-3" />
+                    </Button>
+                  </div>
+                )}
+              </div>
               <div className="flex items-center gap-2 mt-1">
                 <Clock className="h-4 w-4 text-gray-400" />
                 <span className="text-sm text-gray-600">{flight.duration}</span>
@@ -82,7 +192,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
     </Card>
   );
 
-  const renderHotelResult = (hotel: any) => (
+  const renderHotelResult = (hotel: any, index: number) => (
     <Card key={hotel.id} className="hover:shadow-lg transition-shadow duration-300">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
@@ -123,7 +233,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
     </Card>
   );
 
-  const renderTrainResult = (train: any) => (
+  const renderTrainResult = (train: any, index: number) => (
     <Card key={train.id} className="hover:shadow-lg transition-shadow duration-300">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
@@ -134,7 +244,23 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
             <div>
               <h3 className="font-bold text-lg">{train.trainName}</h3>
               <p className="text-gray-600">{train.trainNumber}</p>
-              <p className="text-gray-600">{train.from} → {train.to}</p>
+              <div className="flex items-center gap-2">
+                {editingResult === index ? (
+                  <RouteEditor result={train} index={index} />
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <p className="text-gray-600">{train.from} → {train.to}</p>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => handleEditRoute(index)}
+                      className="p-1 h-6 w-6"
+                    >
+                      <Edit3 className="h-3 w-3" />
+                    </Button>
+                  </div>
+                )}
+              </div>
               <div className="flex items-center gap-2 mt-1">
                 <Clock className="h-4 w-4 text-gray-400" />
                 <span className="text-sm text-gray-600">{train.duration}</span>
@@ -159,7 +285,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
     </Card>
   );
 
-  const renderBusResult = (bus: any) => (
+  const renderBusResult = (bus: any, index: number) => (
     <Card key={bus.id} className="hover:shadow-lg transition-shadow duration-300">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
@@ -169,7 +295,23 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
             </div>
             <div>
               <h3 className="font-bold text-lg">{bus.busOperator}</h3>
-              <p className="text-gray-600">{bus.from} → {bus.to}</p>
+              <div className="flex items-center gap-2">
+                {editingResult === index ? (
+                  <RouteEditor result={bus} index={index} />
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <p className="text-gray-600">{bus.from} → {bus.to}</p>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => handleEditRoute(index)}
+                      className="p-1 h-6 w-6"
+                    >
+                      <Edit3 className="h-3 w-3" />
+                    </Button>
+                  </div>
+                )}
+              </div>
               <div className="flex items-center gap-2 mt-1">
                 <Clock className="h-4 w-4 text-gray-400" />
                 <span className="text-sm text-gray-600">{bus.duration}</span>
@@ -194,7 +336,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
     </Card>
   );
 
-  const renderPackageResult = (pkg: any) => (
+  const renderPackageResult = (pkg: any, index: number) => (
     <Card key={pkg.id} className="hover:shadow-lg transition-shadow duration-300">
       <CardContent className="p-6">
         <div className="flex items-center justify-between">
@@ -240,22 +382,22 @@ const SearchResults: React.FC<SearchResultsProps> = ({ results, onBooking }) => 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-2">Search Results</h2>
-          <p className="text-gray-600">Found {results.length} options for you</p>
+          <p className="text-gray-600">Found {modifiedResults.length} options for you</p>
         </div>
         
         <div className="space-y-4">
-          {results.map((result) => {
+          {modifiedResults.map((result, index) => {
             // Determine the type based on the properties
             if (result.airline) {
-              return renderFlightResult(result);
+              return renderFlightResult(result, index);
             } else if (result.amenities) {
-              return renderHotelResult(result);
+              return renderHotelResult(result, index);
             } else if (result.trainName) {
-              return renderTrainResult(result);
+              return renderTrainResult(result, index);
             } else if (result.busOperator) {
-              return renderBusResult(result);
+              return renderBusResult(result, index);
             } else if (result.duration && result.includes) {
-              return renderPackageResult(result);
+              return renderPackageResult(result, index);
             }
             return null;
           })}
